@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/RadicleWindows.Console/RadicleWindows.Console.csproj" />
+    <Project Path="src/RadicleWindows.Core/RadicleWindows.Core.csproj" />
+    <Project Path="src/RadicleWindows.Wpf/RadicleWindows.Wpf.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/RadicleWindows.Core.Tests/RadicleWindows.Core.Tests.csproj" />
+  </Folder>
+</Solution>

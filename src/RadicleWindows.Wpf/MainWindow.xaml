@@ -1,0 +1,175 @@
+<Window x:Class="RadicleWindows.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Radicle for Windows" Height="700" Width="1100"
+        Background="{StaticResource RadicleBackground}"
+        Foreground="{StaticResource RadicleForeground}"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource RadicleSurface}" Padding="16,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="🌱 Radicle" FontSize="22" FontWeight="Bold"
+                           Foreground="{StaticResource RadicleAccent}" VerticalAlignment="Center"/>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Ellipse Width="10" Height="10" Fill="{StaticResource RadicleSuccess}"
+                             Margin="0,0,6,0" x:Name="NodeIndicator"/>
+                    <TextBlock Text="Node: Unknown" x:Name="NodeStatusText"
+                               Foreground="{StaticResource RadicleForeground}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Content with sidebar -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidebar -->
+            <Border Grid.Column="0" Background="{StaticResource RadicleSurface}" Padding="8">
+                <StackPanel>
+                    <Button Content="📊 Dashboard" Margin="0,4" Click="OnDashboardClick" Style="{x:Null}"
+                            Background="Transparent" Foreground="{StaticResource RadicleForeground}"
+                            BorderThickness="0" Padding="10,8" HorizontalContentAlignment="Left" FontSize="14"/>
+                    <Button Content="📁 Repositories" Margin="0,4" Click="OnRepositoriesClick" Style="{x:Null}"
+                            Background="Transparent" Foreground="{StaticResource RadicleForeground}"
+                            BorderThickness="0" Padding="10,8" HorizontalContentAlignment="Left" FontSize="14"/>
+                    <Button Content="📋 Issues" Margin="0,4" Click="OnIssuesClick" Style="{x:Null}"
+                            Background="Transparent" Foreground="{StaticResource RadicleForeground}"
+                            BorderThickness="0" Padding="10,8" HorizontalContentAlignment="Left" FontSize="14"/>
+                    <Button Content="🔀 Patches" Margin="0,4" Click="OnPatchesClick" Style="{x:Null}"
+                            Background="Transparent" Foreground="{StaticResource RadicleForeground}"
+                            BorderThickness="0" Padding="10,8" HorizontalContentAlignment="Left" FontSize="14"/>
+                    <Button Content="🖥️ Node" Margin="0,4" Click="OnNodeClick" Style="{x:Null}"
+                            Background="Transparent" Foreground="{StaticResource RadicleForeground}"
+                            BorderThickness="0" Padding="10,8" HorizontalContentAlignment="Left" FontSize="14"/>
+
+                    <Separator Margin="0,12" Background="#3A3A4C"/>
+
+                    <Button Content="👤 Identity" Margin="0,4" Click="OnIdentityClick" Style="{x:Null}"
+                            Background="Transparent" Foreground="{StaticResource RadicleForeground}"
+                            BorderThickness="0" Padding="10,8" HorizontalContentAlignment="Left" FontSize="14"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Main content area -->
+            <Border Grid.Column="1" Padding="20">
+                <Grid>
+                    <!-- Dashboard panel -->
+                    <StackPanel x:Name="DashboardPanel" Visibility="Visible">
+                        <TextBlock Text="Dashboard" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"
+                                   Foreground="{StaticResource RadicleAccent}"/>
+                        <TextBlock Text="Welcome to Radicle for Windows" FontSize="16" Margin="0,0,0,8"/>
+                        <TextBlock TextWrapping="Wrap" FontSize="14" Foreground="#A0A0B0">
+                            Radicle is a peer-to-peer code collaboration and publishing stack.
+                            Use the sidebar to navigate between repositories, issues, patches, and node management.
+                        </TextBlock>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,24,0,0">
+                            <Border Background="{StaticResource RadicleSurface}" CornerRadius="8" Padding="20" Margin="0,0,12,0" MinWidth="180">
+                                <StackPanel>
+                                    <TextBlock Text="Repositories" FontSize="13" Foreground="#A0A0B0"/>
+                                    <TextBlock Text="–" FontSize="28" FontWeight="Bold" x:Name="RepoCountText"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{StaticResource RadicleSurface}" CornerRadius="8" Padding="20" Margin="0,0,12,0" MinWidth="180">
+                                <StackPanel>
+                                    <TextBlock Text="Open Issues" FontSize="13" Foreground="#A0A0B0"/>
+                                    <TextBlock Text="–" FontSize="28" FontWeight="Bold" x:Name="IssueCountText"/>
+                                </StackPanel>
+                            </Border>
+                            <Border Background="{StaticResource RadicleSurface}" CornerRadius="8" Padding="20" MinWidth="180">
+                                <StackPanel>
+                                    <TextBlock Text="Patches" FontSize="13" Foreground="#A0A0B0"/>
+                                    <TextBlock Text="–" FontSize="28" FontWeight="Bold" x:Name="PatchCountText"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Repositories panel -->
+                    <StackPanel x:Name="RepositoriesPanel" Visibility="Collapsed">
+                        <TextBlock Text="Repositories" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"
+                                   Foreground="{StaticResource RadicleAccent}"/>
+                        <Button Content="🔄 Refresh" Click="OnRefreshReposClick" Style="{x:Null}"
+                                Background="{StaticResource RadiclePrimary}" Foreground="White"
+                                Padding="12,6" BorderThickness="0" Margin="0,0,0,12" HorizontalAlignment="Left"/>
+                        <ListBox x:Name="ReposListBox" Background="Transparent"
+                                 Foreground="{StaticResource RadicleForeground}" BorderThickness="0"/>
+                    </StackPanel>
+
+                    <!-- Issues panel -->
+                    <StackPanel x:Name="IssuesPanel" Visibility="Collapsed">
+                        <TextBlock Text="Issues" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"
+                                   Foreground="{StaticResource RadicleAccent}"/>
+                        <Button Content="🔄 Refresh" Click="OnRefreshIssuesClick" Style="{x:Null}"
+                                Background="{StaticResource RadiclePrimary}" Foreground="White"
+                                Padding="12,6" BorderThickness="0" Margin="0,0,0,12" HorizontalAlignment="Left"/>
+                        <ListBox x:Name="IssuesListBox" Background="Transparent"
+                                 Foreground="{StaticResource RadicleForeground}" BorderThickness="0"/>
+                    </StackPanel>
+
+                    <!-- Patches panel -->
+                    <StackPanel x:Name="PatchesPanel" Visibility="Collapsed">
+                        <TextBlock Text="Patches" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"
+                                   Foreground="{StaticResource RadicleAccent}"/>
+                        <Button Content="🔄 Refresh" Click="OnRefreshPatchesClick" Style="{x:Null}"
+                                Background="{StaticResource RadiclePrimary}" Foreground="White"
+                                Padding="12,6" BorderThickness="0" Margin="0,0,0,12" HorizontalAlignment="Left"/>
+                        <ListBox x:Name="PatchesListBox" Background="Transparent"
+                                 Foreground="{StaticResource RadicleForeground}" BorderThickness="0"/>
+                    </StackPanel>
+
+                    <!-- Node panel -->
+                    <StackPanel x:Name="NodePanel" Visibility="Collapsed">
+                        <TextBlock Text="Node Management" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"
+                                   Foreground="{StaticResource RadicleAccent}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <Button Content="▶ Start" Click="OnStartNodeClick" Style="{x:Null}"
+                                    Background="{StaticResource RadicleSuccess}" Foreground="#1E1E2E"
+                                    Padding="12,6" BorderThickness="0" Margin="0,0,8,0"/>
+                            <Button Content="⏹ Stop" Click="OnStopNodeClick" Style="{x:Null}"
+                                    Background="{StaticResource RadicleError}" Foreground="#1E1E2E"
+                                    Padding="12,6" BorderThickness="0" Margin="0,0,8,0"/>
+                            <Button Content="🔄 Refresh" Click="OnRefreshNodeClick" Style="{x:Null}"
+                                    Background="{StaticResource RadiclePrimary}" Foreground="White"
+                                    Padding="12,6" BorderThickness="0"/>
+                        </StackPanel>
+                        <TextBlock x:Name="NodeDetailText" TextWrapping="Wrap" FontSize="14"/>
+                    </StackPanel>
+
+                    <!-- Identity panel -->
+                    <StackPanel x:Name="IdentityPanel" Visibility="Collapsed">
+                        <TextBlock Text="Identity" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,16"
+                                   Foreground="{StaticResource RadicleAccent}"/>
+                        <Button Content="🔄 Refresh" Click="OnRefreshIdentityClick" Style="{x:Null}"
+                                Background="{StaticResource RadiclePrimary}" Foreground="White"
+                                Padding="12,6" BorderThickness="0" Margin="0,0,0,12" HorizontalAlignment="Left"/>
+                        <TextBlock x:Name="IdentityText" TextWrapping="Wrap" FontSize="14"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Status bar -->
+        <Border Grid.Row="2" Background="{StaticResource RadicleSurface}" Padding="12,6">
+            <TextBlock x:Name="StatusBarText" Text="Ready" FontSize="12" Foreground="#A0A0B0"/>
+        </Border>
+    </Grid>
+</Window>

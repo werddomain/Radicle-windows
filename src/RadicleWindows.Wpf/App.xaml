@@ -1,0 +1,16 @@
+<Application x:Class="RadicleWindows.Wpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- Radicle-inspired colour palette -->
+        <SolidColorBrush x:Key="RadiclePrimary" Color="#5B4CE0" />
+        <SolidColorBrush x:Key="RadicleAccent" Color="#7C6FF7" />
+        <SolidColorBrush x:Key="RadicleBackground" Color="#1E1E2E" />
+        <SolidColorBrush x:Key="RadicleSurface" Color="#2A2A3C" />
+        <SolidColorBrush x:Key="RadicleForeground" Color="#E0E0E8" />
+        <SolidColorBrush x:Key="RadicleSuccess" Color="#4ADE80" />
+        <SolidColorBrush x:Key="RadicleWarning" Color="#FACC15" />
+        <SolidColorBrush x:Key="RadicleError" Color="#F87171" />
+    </Application.Resources>
+</Application>
