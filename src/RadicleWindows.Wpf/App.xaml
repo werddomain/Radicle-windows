@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Radicle-inspired colour palette -->
+        <!-- Radicle-inspired color palette -->
         <SolidColorBrush x:Key="RadiclePrimary" Color="#5B4CE0" />
         <SolidColorBrush x:Key="RadicleAccent" Color="#7C6FF7" />
         <SolidColorBrush x:Key="RadicleBackground" Color="#1E1E2E" />

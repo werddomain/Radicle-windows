@@ -24,7 +24,7 @@ Windows desktop GUI for managing Radicle repositories, built with .NET 8 and WPF
 - Issue and patch management
 - Node start/stop/status controls
 - Identity viewer
-- Dark theme with Radicle-inspired colour palette
+- Dark theme with Radicle-inspired color palette
 
 ### 3. Console Application (`src/RadicleWindows.Console`)
 
