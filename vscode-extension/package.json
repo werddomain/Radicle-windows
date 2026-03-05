@@ -1,0 +1,141 @@
+{
+  "name": "radicle-vscode",
+  "displayName": "Radicle",
+  "description": "VS Code extension for the Radicle peer-to-peer code collaboration stack",
+  "version": "0.1.0",
+  "publisher": "radicle-community",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "keywords": [
+    "radicle",
+    "p2p",
+    "git",
+    "collaboration",
+    "decentralized"
+  ],
+  "activationEvents": [
+    "workspaceContains:.git"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "radicle.init",
+        "title": "Radicle: Initialize Repository"
+      },
+      {
+        "command": "radicle.clone",
+        "title": "Radicle: Clone Repository"
+      },
+      {
+        "command": "radicle.sync",
+        "title": "Radicle: Sync"
+      },
+      {
+        "command": "radicle.auth",
+        "title": "Radicle: Authenticate"
+      },
+      {
+        "command": "radicle.self",
+        "title": "Radicle: Show Identity"
+      },
+      {
+        "command": "radicle.nodeStart",
+        "title": "Radicle: Start Node"
+      },
+      {
+        "command": "radicle.nodeStop",
+        "title": "Radicle: Stop Node"
+      },
+      {
+        "command": "radicle.nodeStatus",
+        "title": "Radicle: Node Status"
+      },
+      {
+        "command": "radicle.issueList",
+        "title": "Radicle: List Issues"
+      },
+      {
+        "command": "radicle.issueCreate",
+        "title": "Radicle: Create Issue"
+      },
+      {
+        "command": "radicle.patchList",
+        "title": "Radicle: List Patches"
+      },
+      {
+        "command": "radicle.patchCreate",
+        "title": "Radicle: Create Patch"
+      },
+      {
+        "command": "radicle.issuesRefresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "radicle.patchesRefresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "radicle",
+          "title": "Radicle",
+          "icon": "$(git-branch)"
+        }
+      ]
+    },
+    "views": {
+      "radicle": [
+        {
+          "id": "radicleIssues",
+          "name": "Issues"
+        },
+        {
+          "id": "radiclePatches",
+          "name": "Patches"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "radicle.issuesRefresh",
+          "when": "view == radicleIssues",
+          "group": "navigation"
+        },
+        {
+          "command": "radicle.patchesRefresh",
+          "when": "view == radiclePatches",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-electron": "^2.3.8",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "mocha": "^10.2.0",
+    "typescript": "^5.3.3"
+  }
+}
